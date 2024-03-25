@@ -15,6 +15,7 @@
   },
   "scripts": {
     "hardhat:lint-staged": "yarn workspace @dao/hardhat lint-staged",
-    "next:lint": "yarn workspace @dao/frontend lint"
+    "next:lint": "yarn workspace @dao/frontend lint",
+    "deploy":"yarn workspace @dao/hardhat deploy"
   }
 }
