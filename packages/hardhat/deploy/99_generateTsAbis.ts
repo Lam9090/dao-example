@@ -112,7 +112,7 @@ const generateTsAbis: DeployFunction = async function () {
   }
   fs.writeFileSync(
     `${TARGET_DIR}deployedContracts.ts`,
-    prettier.format(
+    await prettier.format(
       `${generatedContractComment}
       import {
         Abi,
