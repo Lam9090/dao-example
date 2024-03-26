@@ -111,6 +111,8 @@ contract CryptoDevsNFTDao is Ownable {
 		Approve,
 		Reject
 	}
+
+	event voteProposal(string msg, address _address, uint tokenId, bool voted);
 	function voteOnProposal(
 		uint proposalId,
 		Vote vote
@@ -122,9 +124,15 @@ contract CryptoDevsNFTDao is Ownable {
 
 		for (uint i = 0; i < voterNFTBalance; i++) {
 			uint tokenId = cryptoDevsNFT.tokenOfOwnerByIndex(msg.sender, i);
+			emit voteProposal(
+				"vote proposal",
+				msg.sender,
+				tokenId,
+				proposal.voters[tokenId]
+			);
 			if (proposal.voters[tokenId] == false) {
 				numVotes++;
-				proposal.voters[tokenId] == true;
+				proposal.voters[tokenId] = true;
 			}
 		}
 		require(numVotes > 0, "ALREADY_VOTED");
