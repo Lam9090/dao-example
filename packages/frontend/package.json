@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "@dao/frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.0.2",
+    "@tanstack/react-query": "^5.28.8",
     "abitype": "^1.0.2",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
+    "viem": "2.x",
     "wagmi": "^2.5.12"
   },
   "devDependencies": {

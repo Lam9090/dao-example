@@ -16,6 +16,10 @@
   "scripts": {
     "hardhat:lint-staged": "yarn workspace @dao/hardhat lint-staged",
     "next:lint": "yarn workspace @dao/frontend lint",
-    "deploy":"yarn workspace @dao/hardhat deploy"
+    "deploy":"yarn workspace @dao/hardhat deploy",
+    "dev": "yarn workspace @dao/frontend dev",
+    "chain": "yarn workspace @dao/hardhat chain",
+    "compile":"yarn workspace @dao/hardhat compile"
+
   }
 }

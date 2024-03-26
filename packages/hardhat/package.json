@@ -11,6 +11,7 @@
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@types/chai": "4",
+    "@types/lodash": "^4.17.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.30",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
@@ -36,7 +37,8 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.1",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21"
   },
   "scripts": {
     "lint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore ./*.ts ./deploy/**/*.ts ./scripts/**/*.ts ./test/**/*.ts",
