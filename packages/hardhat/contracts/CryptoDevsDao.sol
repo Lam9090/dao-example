@@ -1,8 +1,7 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.25;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-
 interface ICryptoDevsNFT {
 	/// @dev balanceof() returns the number of NFTs owned by the given address
 	/// @param owner - the address to get the balance for

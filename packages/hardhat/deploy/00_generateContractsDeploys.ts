@@ -33,6 +33,7 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
     console.log(`contract deployed${"nftMarketplaceContract"} with address: ${nftMarketplaceContract.address}`);
     const cryptoDevsNFTContract = await hre.deployments.deploy("CryptoDevsNFT", {
       from: deployer.address,
+      args: [process.env.IPFS_METADATA_CID],
     });
     console.log(`contract deployed${"CryptoDevsNFT"} with address: ${cryptoDevsNFTContract.address}`);
     const cryptoDevsNFTDaoContract = await hre.deployments.deploy("CryptoDevsNFTDao", {
