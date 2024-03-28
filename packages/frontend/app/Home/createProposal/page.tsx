@@ -1,14 +1,11 @@
 "use client";
 
 import { useContracts, useCryptoDevsNFTBalanceOf } from "@/services/queries";
-import { queryClient } from "@/services/queryClient";
 import { wagmiConfigWithWallets } from "@/services/web3/wagmiConfig";
-import { Address } from "abitype";
-import React, { useState } from "react";
+import { useState } from "react";
+import { parseEther } from "viem";
 import {
-  useAccount,
-  useWaitForTransactionReceipt,
-  useWriteContract,
+  useAccount, useWriteContract
 } from "wagmi";
 import { waitForTransactionReceipt } from "wagmi/actions";
 
@@ -49,6 +46,7 @@ const CreateProposal = () => {
         address: CryptoDevsNFT.address,
         abi: CryptoDevsNFT.abi,
         functionName: "mint",
+        value: parseEther('0.01')
       });
       await waitForTransactionReceipt(wagmiConfigWithWallets, { hash: tx });
 
@@ -65,7 +63,7 @@ const CreateProposal = () => {
         <div>
           But you could
           <button className="text-red-500" onClick={buyNft}>
-            Buy one
+            Mint NFT
           </button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
 import { formatEther } from "viem/utils";
-import { useAccount, useChainId, useConfig, useWriteContract } from "wagmi";
+import { useAccount, useChainId, useConfig } from "wagmi";
 import deployedContracts from "@/contracts/deployedContracts";
 import { sepolia } from "viem/chains";
 import { getBalanceQueryOptions, readContractQueryOptions } from "wagmi/query";
@@ -13,7 +12,7 @@ export const NFTBalance = () => {
 
   const chainId = useChainId() as typeof sepolia.id;
 
-  const {  CryptoDevsNFTDao } =
+  const {  CryptoDevsNFTDao,CryptoDevsNFT } =
     deployedContracts[chainId];
 
   // Fetch the owner of the DAO
@@ -34,6 +33,16 @@ export const NFTBalance = () => {
     })
   );
 
+  const totalSupply = useSuspenseQuery(
+    readContractQueryOptions(config,{
+      abi:CryptoDevsNFT.abi,
+      address:CryptoDevsNFT.address,
+      functionName:'totalSupply'
+    })
+  )
+
+  console.log(Number(totalSupply.data),'data')
+
   // Fetch the CryptoDevs NFT balance of the user
   const nftBalanceOfUser = useCryptoDevsNFTBalanceOf(address!)
   return (
@@ -42,6 +51,9 @@ export const NFTBalance = () => {
       <div>Welcome to the DAO!</div>
       <div>
         Your CryptoDevs NFT Balance: {nftBalanceOfUser?.data?.toString()}
+      <div>
+        {Number(totalSupply.data)}/10 has been minted
+        </div>
         <br />
         {daoBalance.data && (
           <>

@@ -1,13 +1,7 @@
 "use client";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
-import { useAccount, useChainId, useConfig, useWriteContract } from "wagmi";
-import { waitForTransactionReceipt } from "wagmi/actions";
-import deployedContracts from "@/contracts/deployedContracts";
-import { sepolia } from "viem/chains";
-import { wagmiConfigWithWallets } from "@/services/web3/wagmiConfig";
-import { readContractQueryOptions } from "wagmi/query";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 
 export default function RootPage() {
@@ -30,7 +24,6 @@ export default function RootPage() {
   if (!isConnected) {
     return (
       <div>
-        b
         <ConnectButton />
       </div>
     );
