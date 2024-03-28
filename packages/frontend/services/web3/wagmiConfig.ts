@@ -10,7 +10,7 @@ const { wallets } = getDefaultWallets();
 
 export const wagmiConfigWithWallets = getDefaultConfig({
   chains: [hardhat, sepolia],
-  ssr: true,
+  pollingInterval:3000,
   wallets: [
     ...wallets,
     {
@@ -21,10 +21,6 @@ export const wagmiConfigWithWallets = getDefaultConfig({
   storage: createStorage({
     storage: cookieStorage,
   }),
-  transports: {
-    [sepolia.id]: http(),
-    [hardhat.id]: http(),
-  },
   projectId: process.env.NEXT_PUBLIC_PROJECT_ID ?? "PROJECT_ID",
   appName: "Dao example",
 });
