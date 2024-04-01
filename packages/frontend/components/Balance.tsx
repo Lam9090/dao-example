@@ -6,6 +6,7 @@ import { sepolia } from "viem/chains";
 import { getBalanceQueryOptions, readContractQueryOptions } from "wagmi/query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useCryptoDevsNFTBalanceOf } from "@/services/queries";
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
 
 export const NFTBalance = () => {
   const { address } = useAccount();
@@ -46,9 +47,12 @@ export const NFTBalance = () => {
   // Fetch the CryptoDevs NFT balance of the user
   const nftBalanceOfUser = useCryptoDevsNFTBalanceOf(address!)
   return (
-    <div>
+    <Card>
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
       <h1>Welcome to Crypto Devs!</h1>
       <div>Welcome to the DAO!</div>
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
       <div>
         Your CryptoDevs NFT Balance: {nftBalanceOfUser?.data?.toString()}
       <div>
@@ -64,6 +68,7 @@ export const NFTBalance = () => {
         <br />
         Total Number of Proposals: {numOfProposalsInDAO?.data?.toString()}
       </div>
-    </div>
+   </CardBody>
+    </Card>
   );
 };

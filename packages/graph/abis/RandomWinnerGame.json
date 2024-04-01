@@ -51,6 +51,49 @@
     "anonymous": false,
     "inputs": [
       {
+        "components": [
+          { "internalType": "uint256", "name": "gameId", "type": "uint256" },
+          {
+            "internalType": "enum RandomWinnerGame.GameStatus",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxPlayers",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "entryFeeNumerator",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "entryFeeDenominator",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "players",
+            "type": "address[]"
+          },
+          { "internalType": "address", "name": "winner", "type": "address" },
+          { "internalType": "address", "name": "owner", "type": "address" }
+        ],
+        "indexed": false,
+        "internalType": "struct RandomWinnerGame.Game",
+        "name": "game",
+        "type": "tuple"
+      }
+    ],
+    "name": "GameStatusChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": false,
         "internalType": "uint256",
         "name": "gameId",

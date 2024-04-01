@@ -1,5 +1,6 @@
 import {
   GameStarted as GameStartedEvent,
+  GameStatusChanged as GameStatusChangedEvent,
   NewGame as NewGameEvent,
   OwnershipTransferred as OwnershipTransferredEvent,
   PlayerJoined as PlayerJoinedEvent,
@@ -9,6 +10,7 @@ import {
 } from "../generated/RandomWinnerGame/RandomWinnerGame"
 import {
   GameStarted,
+  GameStatusChanged,
   NewGame,
   OwnershipTransferred,
   PlayerJoined,
@@ -22,6 +24,26 @@ export function handleGameStarted(event: GameStartedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.gameId = event.params.gameId
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleGameStatusChanged(event: GameStatusChangedEvent): void {
+  let entity = new GameStatusChanged(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.game_gameId = event.params.game.gameId
+  entity.game_status = event.params.game.status
+  entity.game_maxPlayers = event.params.game.maxPlayers
+  entity.game_entryFeeNumerator = event.params.game.entryFeeNumerator
+  entity.game_entryFeeDenominator = event.params.game.entryFeeDenominator
+  entity.game_players = event.params.game.players
+  entity.game_winner = event.params.game.winner
+  entity.game_owner = event.params.game.owner
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

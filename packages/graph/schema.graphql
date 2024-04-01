@@ -6,6 +6,21 @@ type GameStarted @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type GameStatusChanged @entity(immutable: true) {
+  id: Bytes!
+  game_gameId: BigInt! # uint256
+  game_status: Int! # uint8
+  game_maxPlayers: BigInt! # uint256
+  game_entryFeeNumerator: BigInt! # uint256
+  game_entryFeeDenominator: BigInt! # uint256
+  game_players: [Bytes!]! # address[]
+  game_winner: Bytes! # address
+  game_owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type NewGame @entity(immutable: true) {
   id: Bytes!
   gameId: BigInt! # uint256

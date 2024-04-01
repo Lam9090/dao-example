@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { useState } from "react";
 import { useAccount, useChainId, useConfig, useWriteContract } from "wagmi";
@@ -11,16 +11,18 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import styles from "./home.module.css";
 import Head from "next/head";
 import { NFTBalance } from "@/components/Balance";
-import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/navigation";
+import AutoBreadCrums from "@/components/AutoBreadcrums";
+import { Button, Spacer } from "@nextui-org/react";
+import NavBar from "@/components/NavBar";
+import Link from "next/link";
 
 export default function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { address,isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
   const chainId = useChainId() as typeof sepolia.id;
 
   const { CryptoDevsNFTDao } = deployedContracts[chainId];
@@ -32,7 +34,7 @@ export default function HomeLayout({
   // Fetch the owner of the DAO
 
   const config = useConfig();
-  const router = useRouter()
+  const router = useRouter();
 
   const daoOwner = useSuspenseQuery(
     readContractQueryOptions(config, {
@@ -60,46 +62,44 @@ export default function HomeLayout({
     setLoading(false);
   }
 
-  if (!isConnected){
-    router.replace('/');
+  if (!isConnected) {
+    router.replace("/");
     return;
   }
 
   return (
     <div>
-      
       <Head>
         <title>CryptoDevs DAO</title>
         <meta name="description" content="CryptoDevs DAO" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className="fixed">
-        <ConnectButton></ConnectButton>
-      </div>
-
-      <div className={styles.main}>
-        <div>
+      <div className="flex justify-center items-center flex-col">
+        <NavBar></NavBar>
+        <AutoBreadCrums></AutoBreadCrums>
+        <Spacer y={4}></Spacer>
+        <div className="flex flex-col justify-center items-center">
           <NFTBalance></NFTBalance>
+        <Spacer y={4}></Spacer>
           <div className={styles.flex}>
-            <Link key={"create Proposal"} href={"/Home/createProposal"}>
-              <button className={styles.button}>Create Proposal</button>
+            <Link  href={"/Home/createProposal"}>
+              <Button>Create Proposal</Button>
             </Link>
-            <Link key={"create Proposal"} href={"/Home/viewProposals"}>
-              <button className={styles.button}>View Proposals</button>
+            <Link  href={"/Home/viewProposals"}>
+              <Button>View Proposals</Button>
             </Link>
           </div>
           {children}
-          {/* Display additional withdraw button if connected wallet is owner */}
           {address &&
           address.toLowerCase() === daoOwner?.data?.toLowerCase() ? (
             <div>
+        <Spacer y={4}></Spacer>
               {loading ? (
-                <button className={styles.button}>Loading...</button>
+                <Button type="button">Loading...</Button>
               ) : (
-                <button className={styles.button} onClick={withdrawDAOEther}>
+                <Button color="primary" onClick={withdrawDAOEther}>
                   Withdraw DAO ETH
-                </button>
+                </Button>
               )}
             </div>
           ) : (

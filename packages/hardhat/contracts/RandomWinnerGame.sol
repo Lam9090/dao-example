@@ -75,10 +75,11 @@ contract RandomWinnerGame is VRFConsumerBaseV2,Ownable {
   function joinGame(uint gameId)public payable onlyJoinableGame(gameId){
     Game storage game = games[gameId];
     game.players.push(address(msg.sender));
+    emit GameStatusChanged(game);
     emit PlayerJoined(gameId, msg.sender,msg.value);
   }
 
-
+  event GameStatusChanged(Game game);
 
 
   event NewGame(uint gameId,address owner, uint maxPlayers, uint entryFee);
@@ -96,6 +97,7 @@ contract RandomWinnerGame is VRFConsumerBaseV2,Ownable {
     game.status = GameStatus.PENDING;
 
     holdingGame[msg.sender] = gameId;
+    emit GameStatusChanged(game);
     emit NewGame(gameId,msg.sender,_maxPlayers,game.entryFeeNumerator * 10 ** 18 / game.entryFeeDenominator);
   }
 
@@ -152,6 +154,7 @@ event receiveRandomWord(uint requestId,uint[] randomwords,uint gameId);
       
       uint fee = game.entryFeeNumerator * 10 ** 18 / game.entryFeeDenominator;
       (bool sent,) = payable(winner).call{value: game.maxPlayers *fee}("");
+      emit GameStatusChanged(game);
       emit finishGameEvent(gameId,winner);
       require(sent,'Finish Game failed: cannot sent ether to winner');
     }

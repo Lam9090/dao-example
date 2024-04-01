@@ -902,7 +902,7 @@ const deployedContracts = {
   },
   11155111: {
     CryptoDevsDao: {
-      address: "0x7a14c989e4a5ad4220563684899CC0E709307EC1",
+      address: "0xDEc472A09FB6C88762A424dc5a904a4656004256",
       abi: [
         {
           inputs: [
@@ -1175,7 +1175,7 @@ const deployedContracts = {
       },
     },
     CryptoDevsNFT: {
-      address: "0x9D6bd4Fd0a68555d109aDd67209383733010738C",
+      address: "0xCc9A224750193E82fC5eEe6cdc76E862C059e4e2",
       abi: [
         {
           inputs: [
@@ -2169,7 +2169,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RandomWinnerGame: {
-      address: "0xD5B2b1051FB624469CEBc818a19d030063269733",
+      address: "0xa874EA62F967Ac74031CFDd5b986ff15E628DA2a",
       abi: [
         {
           inputs: [
@@ -2241,6 +2241,61 @@ const deployedContracts = {
             },
           ],
           name: "GameStarted",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "gameId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "enum RandomWinnerGame.GameStatus",
+                  name: "status",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "maxPlayers",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "entryFeeNumerator",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "entryFeeDenominator",
+                  type: "uint256",
+                },
+                {
+                  internalType: "address[]",
+                  name: "players",
+                  type: "address[]",
+                },
+                {
+                  internalType: "address",
+                  name: "winner",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+              ],
+              indexed: false,
+              internalType: "struct RandomWinnerGame.Game",
+              name: "game",
+              type: "tuple",
+            },
+          ],
+          name: "GameStatusChanged",
           type: "event",
         },
         {

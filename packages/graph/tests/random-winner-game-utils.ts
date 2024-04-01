@@ -2,6 +2,7 @@ import { newMockEvent } from "matchstick-as"
 import { ethereum, BigInt, Address } from "@graphprotocol/graph-ts"
 import {
   GameStarted,
+  GameStatusChanged,
   NewGame,
   OwnershipTransferred,
   PlayerJoined,
@@ -20,6 +21,20 @@ export function createGameStartedEvent(gameId: BigInt): GameStarted {
   )
 
   return gameStartedEvent
+}
+
+export function createGameStatusChangedEvent(
+  game: ethereum.Tuple
+): GameStatusChanged {
+  let gameStatusChangedEvent = changetype<GameStatusChanged>(newMockEvent())
+
+  gameStatusChangedEvent.parameters = new Array()
+
+  gameStatusChangedEvent.parameters.push(
+    new ethereum.EventParam("game", ethereum.Value.fromTuple(game))
+  )
+
+  return gameStatusChangedEvent
 }
 
 export function createNewGameEvent(

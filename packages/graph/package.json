@@ -1,5 +1,5 @@
 {
-  "name": "@dao/graph",
+  "name": "dev",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",

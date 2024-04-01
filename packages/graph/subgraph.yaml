@@ -8,15 +8,16 @@ dataSources:
     name: RandomWinnerGame
     network: sepolia
     source:
-      address: "0xD5B2b1051FB624469CEBc818a19d030063269733"
+      address: "0xa874EA62F967Ac74031CFDd5b986ff15E628DA2a"
       abi: RandomWinnerGame
-      startBlock: 05604194
+      startBlock: 5604743
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - GameStarted
+        - GameStatusChanged
         - NewGame
         - OwnershipTransferred
         - PlayerJoined
@@ -29,6 +30,8 @@ dataSources:
       eventHandlers:
         - event: GameStarted(uint256)
           handler: handleGameStarted
+        - event: GameStatusChanged((uint256,uint8,uint256,uint256,uint256,address[],address,address))
+          handler: handleGameStatusChanged
         - event: NewGame(uint256,address,uint256,uint256)
           handler: handleNewGame
         - event: OwnershipTransferred(indexed address,indexed address)

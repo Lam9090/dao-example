@@ -14,12 +14,11 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className +" h-screen dark text-foreground bg-background"}>
         <Head>
           <title>Dao Example</title>
         </Head>
-        <Provider>
-          {children}</Provider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
