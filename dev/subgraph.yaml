@@ -1,0 +1,44 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: RandomWinnerGame
+    network: sepolia
+    source:
+      address: "0xD5B2b1051FB624469CEBc818a19d030063269733"
+      abi: RandomWinnerGame
+      startBlock: 05604194
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - GameStarted
+        - NewGame
+        - OwnershipTransferred
+        - PlayerJoined
+        - finishGameEvent
+        - pickWinnerCall
+        - receiveRandomWord
+      abis:
+        - name: RandomWinnerGame
+          file: ./abis/RandomWinnerGame.json
+      eventHandlers:
+        - event: GameStarted(uint256)
+          handler: handleGameStarted
+        - event: NewGame(uint256,address,uint256,uint256)
+          handler: handleNewGame
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PlayerJoined(uint256,address,uint256)
+          handler: handlePlayerJoined
+        - event: finishGameEvent(uint256,address)
+          handler: handlefinishGameEvent
+        - event: pickWinnerCall(uint256)
+          handler: handlepickWinnerCall
+        - event: receiveRandomWord(uint256,uint256[],uint256)
+          handler: handlereceiveRandomWord
+      file: ./src/random-winner-game.ts

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.25;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 interface ICryptoDevsNFT {
@@ -55,7 +55,7 @@ struct Proposal {
     3.Allow holders of CryptoDevs NFT to excute an proposal after deadline has passed if proposal passed
     4.Store all the proposals in the contract;
 */
-contract CryptoDevsNFTDao is Ownable {
+contract CryptoDevsDao is Ownable {
 	// proposals - a mapping of Proposal Id to Proposal
 	mapping(uint => Proposal) public proposals;
 
@@ -66,7 +66,7 @@ contract CryptoDevsNFTDao is Ownable {
 
 	IFakeNFTMarketplace nftMarketplace;
 
-	constructor(address _nftMarketplace, address _cryptoDevsNFT) {
+	constructor(address _nftMarketplace, address _cryptoDevsNFT) Ownable(msg.sender){
 		cryptoDevsNFT = ICryptoDevsNFT(_cryptoDevsNFT);
 		nftMarketplace = IFakeNFTMarketplace(_nftMarketplace);
 	}

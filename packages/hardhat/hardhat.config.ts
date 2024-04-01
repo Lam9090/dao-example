@@ -20,7 +20,7 @@ const deployerPrivateKey =
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY ?? "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.25",
+  solidity: "0.8.24",
   networks: {
     // View the networks that are pre-configured.
     // If the network you are looking for is not here you can add new network settings
@@ -40,7 +40,7 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: etherscanApiKey,
   },
   verify: {
     etherscan: {

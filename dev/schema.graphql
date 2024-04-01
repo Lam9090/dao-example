@@ -1,0 +1,64 @@
+type GameStarted @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewGame @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  owner: Bytes! # address
+  maxPlayers: BigInt! # uint256
+  entryFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerJoined @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  _address: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type finishGameEvent @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  winner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type pickWinnerCall @entity(immutable: true) {
+  id: Bytes!
+  requestId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type receiveRandomWord @entity(immutable: true) {
+  id: Bytes!
+  requestId: BigInt! # uint256
+  randomwords: [BigInt!]! # uint256[]
+  gameId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

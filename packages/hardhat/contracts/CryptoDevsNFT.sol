@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.25;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -15,7 +15,7 @@ contract CryptoDevsNFT is ERC721Enumerable,Ownable {
 
   uint public maxTokenIds = 10;
 
-  constructor(string memory baseURI)ERC721("CryptoDevs","CD") {
+  constructor(string memory baseURI) ERC721("CryptoDevs","CD") Ownable(msg.sender) {
     _tokenBaseURI = baseURI;
   }
 
@@ -35,8 +35,10 @@ contract CryptoDevsNFT is ERC721Enumerable,Ownable {
     return _tokenBaseURI;
   }
 
+
+
   function tokenURI(uint tokenId) public view virtual override returns (string memory){
-    require(_exists(tokenId), 'Token Id Do Not exist');
+    _requireOwned(tokenId);
     string memory baseURI = _baseURI();
 
     return bytes(baseURI).length > 0? string(abi.encodePacked(baseURI,(tokenId).toString(),'.json')): '';

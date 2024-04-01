@@ -36,15 +36,23 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
       args: [process.env.IPFS_METADATA_CID],
     });
     console.log(`contract deployed${"CryptoDevsNFT"} with address: ${cryptoDevsNFTContract.address}`);
-    const cryptoDevsNFTDaoContract = await hre.deployments.deploy("CryptoDevsNFTDao", {
+    const CryptoDevsDaoContract = await hre.deployments.deploy("CryptoDevsDao", {
       from: deployer.address,
       args: [nftMarketplaceContract.address, cryptoDevsNFTContract.address],
     });
-    console.log(`contract deployed${"CryptoDevsNFTDao"} with address: ${cryptoDevsNFTDaoContract.address}`);
+    console.log(`contract deployed${"CryptoDevsDao"} with address: ${CryptoDevsDaoContract.address}`);
+
+    const randomWinnerGameContract = await hre.deployments.deploy("RandomWinnerGame", {
+      from: deployer.address,
+      args: [process.env.COORDINATOR, process.env.SUBSCRIBTION_ID, process.env.KEY_HASH],
+    });
+    console.log(`contract deployed${"RandomWinnerGame"} with address: ${randomWinnerGameContract.address}`);
+
     await sleep(30 * 1000);
 
     // https://hardhat.org/hardhat-runner/plugins/nomicfoundation-hardhat-verify#using-programmatically
 
+    `graph init --contract-name RandomWinnerGame --studio dev --from-contract 0xD5B2b1051FB624469CEBc818a19d030063269733  --abi /Users/lamtim/repos/dao-example/packages/abis/RandomWinnerGame.json --network sepolia`;
     await Promise.allSettled([
       hre.run("verify:verify", {
         address: nftMarketplaceContract.address,
@@ -54,8 +62,12 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
         address: cryptoDevsNFTContract.address,
       }),
       hre.run("verify:verify", {
-        address: cryptoDevsNFTDaoContract.address,
+        address: CryptoDevsDaoContract.address,
         constructorArguments: [nftMarketplaceContract.address, cryptoDevsNFTContract.address],
+      }),
+      hre.run("verify:verify", {
+        address: randomWinnerGameContract.address,
+        constructorArguments: [process.env.COORDINATOR, process.env.SUBSCRIBTION_ID, process.env.KEY_HASH],
       }),
     ]);
   } catch (err: unknown) {
