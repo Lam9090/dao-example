@@ -110,6 +110,7 @@ contract RandomWinnerGame is VRFConsumerBaseV2,Ownable {
     uint gameId = holdingGame[msg.sender];
     Game storage game = games[gameId];
     game.status = GameStatus.STARTED;
+    emit GameStatusChanged(game);
     emit GameStarted(gameId);
   }
 
