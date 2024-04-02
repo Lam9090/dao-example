@@ -2,7 +2,7 @@ specVersion: 1.0.0
 indexerHints:
   prune: auto
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: RandomWinnerGame
@@ -26,7 +26,7 @@ dataSources:
         - receiveRandomWord
       abis:
         - name: RandomWinnerGame
-          file: ./abis/RandomWinnerGame.json
+          file: RandomWinnerGame/abis/RandomWinnerGame.json
       eventHandlers:
         - event: GameStarted(uint256)
           handler: handleGameStarted
@@ -44,4 +44,4 @@ dataSources:
           handler: handlepickWinnerCall
         - event: receiveRandomWord(uint256,uint256[],uint256)
           handler: handlereceiveRandomWord
-      file: ./src/random-winner-game.ts
+      file: RandomWinnerGame/RandomWinnerGame.wasm

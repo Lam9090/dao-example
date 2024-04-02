@@ -1,3 +1,4 @@
+import { Bytes } from "@graphprotocol/graph-ts"
 import {
   GameStarted as GameStartedEvent,
   GameStatusChanged as GameStatusChangedEvent,
@@ -41,7 +42,7 @@ export function handleGameStatusChanged(event: GameStatusChangedEvent): void {
   entity.game_maxPlayers = event.params.game.maxPlayers
   entity.game_entryFeeNumerator = event.params.game.entryFeeNumerator
   entity.game_entryFeeDenominator = event.params.game.entryFeeDenominator
-  entity.game_players = event.params.game.players
+  entity.game_players = changetype<Bytes[]>(event.params.game.players)
   entity.game_winner = event.params.game.winner
   entity.game_owner = event.params.game.owner
 

@@ -1,6 +1,7 @@
 {
-  "name": "dev",
+  "name": "@dao/graph",
   "license": "UNLICENSED",
+  "version": "1.0.2",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
