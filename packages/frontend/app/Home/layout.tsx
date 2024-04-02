@@ -14,7 +14,6 @@ import { NFTBalance } from "@/components/Balance";
 import { useRouter } from "next/navigation";
 import AutoBreadCrums from "@/components/AutoBreadcrums";
 import { Button, Spacer } from "@nextui-org/react";
-import NavBar from "@/components/NavBar";
 import Link from "next/link";
 
 export default function HomeLayout({
@@ -75,7 +74,6 @@ export default function HomeLayout({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex justify-center items-center flex-col">
-        <NavBar></NavBar>
         <AutoBreadCrums></AutoBreadCrums>
         <Spacer y={4}></Spacer>
         <div className="flex flex-col justify-center items-center">
